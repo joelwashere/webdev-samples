@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        Converters
+    </header>
+    <div id="container">
+        <div class="column">
+            <p class="converter">
+                <label>MPH</label>
+                <input id="mph" type="number" placeholder="0" size="10" oninput="mphToKph(this.value)">
+            </p>
+            <p class="converter">
+                <label>Feet</label>
+                <input id="feet" type="number" placeholder="0" size="10" oninput="feetToMeters(this.value)">
+            </p>
+        </div>
+        <div class="column">
+            <p class="converter">
+                <label>KPH</label>
+                <input id="kph" type="number" placeholder="0" size="10" oninput="kphToMph(this.value)">
+            </p>
+            <p class="converter">
+                <label>Meters</label>
+                <input id="meters" type="number" placeholder="0" size="10" oninput="metersToFeet(this.value)">
+            </p>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
