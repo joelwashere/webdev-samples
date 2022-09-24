@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap');
+
+html {
+    font-family: 'Rubik Dirt', cursive;
+}
+
+header {
+    text-align: center;
+    font-size: 4em;
+}
+
+body {
+    color: white;
+    background-color: black;
+}
+
+label {
+    display: block;
+    font-size: 2em;
+}
+
+#gameContainer {
+    text-align: center;
+}
+
+#gameCanvas {
+    background-color: black;
+    border: 5px solid;
+    border-color: white;
+    border-radius: 10px;
+    margin: 10px;
+}
