@@ -18,7 +18,7 @@ const paddle2Color = "white";
 
 //Ball Info
 const ballRadius = 10;
-let ballColor = "LightCoral";
+const ballSpeedLimit = 12;
 const ballBorderColor = "blue";
 
 let intervalID;
@@ -29,6 +29,7 @@ let ball = {
     y: gameHeight / 2,
     directionX: 0,
     directionY: 0,
+    color: "white"
 }
 
 let player1Score = 0, player2Score = 0;
@@ -77,6 +78,7 @@ function gameLoop() {
 let update = () => {
     input();
 
+    if (ball.speed < 2) ball.speed = 2;
     ball.x += (ball.speed * ball.directionX);
     ball.y += (ball.speed * ball.directionY);
 
@@ -94,17 +96,17 @@ let render = () => {
 
     //Draw Ball
     if (ball.speed <= 2.5)
-        ballColor = "white";
-    else if (ball.speed <= 4.5)
-        ballColor = "green";
-    else if (ball.speed <= 6.5)
-        ballColor = "orange";
-    else if (ball.speed <= 8.5)
-        ballColor = "red";
-    else if (ball.speed <= 6.5)
-        ballColor = "blue";
+        ball.color = "white";
+    else if (ball.speed <= 4)
+        ball.color = "green";
+    else if (ball.speed <= 6)
+        ball.color = "orange";
+    else if (ball.speed <= 8)
+        ball.color = "red";
+    else if (ball.speed > 8)
+        ball.color = "#" + Math.floor(Math.random()*16777215).toString(16);
 
-    context.fillStyle = ballColor;
+    context.fillStyle = ball.color;
     context.beginPath();
     context.arc(ball.x, ball.y, ballRadius, 0, 2 * Math.PI);
     context.fill(); 
@@ -139,11 +141,11 @@ function changeBallDirection() {
 
 function checkCollision() {
 
-    if(ball.y <= 0 + ballRadius)
+    if(ball.y <= 0 + ballRadius || ball.y >= gameHeight - ballRadius) {
         ball.directionY *= -1;
-
-    if(ball.y >= gameHeight - ballRadius)
-        ball.directionY *= -1;
+        if(ball.speed > 3) ball.speed -= .1;
+        ballSound.play();
+    }
 
     if(ball.x <= 0) {
 
@@ -157,7 +159,7 @@ function checkCollision() {
 
     }
 
-    if(ball.x >= gameWidth){
+    if(ball.x >= gameWidth) {
 
         player1Score += 1;
 
@@ -178,7 +180,7 @@ function checkCollision() {
             ball.directionX *= -1;
             ballSound.play();
 
-            ball.speed += 1;
+            ball.speed += (ball.speed >= ballSpeedLimit) ? 0 : 0.75;
 
         }
 
@@ -193,7 +195,7 @@ function checkCollision() {
             ball.directionX *= -1;
             ballSound.play();
 
-            ball.speed += 1;
+            ball.speed += (ball.speed >= ballSpeedLimit) ? 0 : 0.75;
 
         }
 
@@ -207,7 +209,7 @@ function updateScore() {
 }
 
 function createBall() {
-    ball.speed = 1.3;
+    ball.speed = 2;
 
     if(Math.round(Math.random()) == 1)
         ball.directionX =  1; 
@@ -233,6 +235,6 @@ function gameReset() {
 }
 
 //FROM : Andre Mattos : codepen.io
-function lerp (start, end, amt){
+function lerp (start, end, amt) {
     return (1-amt)*start+amt*end
-  }
+}
