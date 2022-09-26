@@ -209,7 +209,7 @@ function updateScore() {
 }
 
 function createBall() {
-    ball.speed = 2;
+    ball.speed = 3;
 
     if(Math.round(Math.random()) == 1)
         ball.directionX =  1; 
@@ -217,9 +217,9 @@ function createBall() {
         ball.directionX = -1; 
 
     if(Math.round(Math.random()) == 1)
-        ball.directionY = Math.random() * 1; //more random directions
+        ball.directionY = Math.random() * 1.5; //more random directions
     else
-        ball.directionY = Math.random() * -1; //more random directions
+        ball.directionY = Math.random() * -1.5; //more random directions
 
     ball.x = gameWidth / 2;
 
